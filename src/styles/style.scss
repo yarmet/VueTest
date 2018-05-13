@@ -1,0 +1,27 @@
+@import '../../node_modules/bootstrap/scss/bootstrap.scss';
+
+body{
+  background-image: url("bg.png");
+}
+
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+
+.linkTable {
+  margin: auto;
+  border-collapse: collapse;
+  background-color: mintcream;
+}
+
+.linkTable td {
+  border: 1px solid #cbcbcb;
+  height: 12px;
+  width: 12px;
+}
+
+
