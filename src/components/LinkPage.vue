@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <group-selector :groups="availableGroups" />
-    <button class="btn btn-dark">загрузить</button>
+    <group-selector />
+    <button class="btn btn-dark" v-on:click="loadWords()">загрузить</button>
     <radio-component :languages="availableLanguages" @callback="radioClicked" />
     <link-table :rows="rows" :selectedLang="availableLanguages.selectedLang" />
   </div>
@@ -20,28 +20,22 @@ export default {
   data () {
     return {
       rows: [],
-      availableGroups: [],
       availableLanguages: {allLanguages: ['русский', 'english'], selectedLang: 'english'}
     }
   },
   created () {
-    axios.get('http://localhost:8080/static/words.json')
-      .then(response => {
-        this.rows = response.data
-      }).catch(e => {
-        console.log(e)
-      })
-
-    axios.get('http://localhost:8080/static/groups.json')
-      .then(response => {
-        this.availableGroups = response.data
-      }).catch(e => {
-        console.log(e)
-      })
   },
   methods: {
     radioClicked (v) {
       this.availableLanguages.selectedLang = v
+    },
+    loadWords () {
+      axios.get('http://localhost:8080/static/words.json')
+        .then(response => {
+          this.rows = response.data
+        }).catch(e => {
+          console.log(e)
+        })
     }
   }
 }

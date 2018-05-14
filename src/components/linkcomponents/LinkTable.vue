@@ -35,6 +35,7 @@ export default {
   components: {HiddenTd},
   props: ['rows', 'selectedLang']
 }
+
 </script>
 
 <style scoped>
