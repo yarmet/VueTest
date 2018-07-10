@@ -10,11 +10,10 @@
 </template>
 
 <script>
-  export default {
-    name: 'RadioComponent',
-    props: ['languages'],
-
-  }
+export default {
+  name: 'RadioComponent',
+  props: ['languages']
+}
 </script>
 
 <style scoped>

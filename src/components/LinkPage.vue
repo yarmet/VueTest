@@ -20,25 +20,25 @@ export default {
   data () {
     return {
       rows: [],
-      groups: { availableGroups: ['a','bb','ccc','dddd'], selected: null },
+      groups: { availableGroups: ['a', 'bb', 'ccc', 'dddd'], selected: null },
       availableLanguages: {allLanguages: ['русский', 'english'], selected: 'english'}
     }
   },
 
   created () {
     axios.get('http://localhost:8080/static/groups.json')
-      .then(response => { this.groups.availableGroups = response.data})
-      .catch(e => {console.log(e)})
+      .then(response => { this.groups.availableGroups = response.data })
+      .catch(e => { console.log(e) })
   },
 
   methods: {
 
     loadWords () {
-      if(this.groups.selected === null) return;
+      if (this.groups.selected === null) return
 
       axios.get('http://localhost:8080/static/words.json')
-        .then(response => {this.rows = response.data})
-        .catch(e => {  console.log(e)})
+        .then(response => { this.rows = response.data })
+        .catch(e => { console.log(e) })
     }
 
   }
