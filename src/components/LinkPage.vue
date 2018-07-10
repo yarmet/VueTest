@@ -1,9 +1,9 @@
 <template>
   <div class="container">
-    <group-selector />
+    <Selector :label="'name'" :items="groups" />
     <button class="btn btn-dark" v-on:click="loadWords()">загрузить</button>
-    <radio-component :languages="availableLanguages" @callback="radioClicked" />
-    <link-table :rows="rows" :selectedLang="availableLanguages.selectedLang" />
+    <radio-component :languages="availableLanguages"  />
+    <link-table :rows="rows" :selectedLang="availableLanguages.selected" />
   </div>
 </template>
 
@@ -11,32 +11,36 @@
 import axios from 'axios'
 import LinkTable from './linkcomponents/LinkTable'
 import RadioComponent from './linkcomponents/RadioComponent'
-import GroupSelector from './linkcomponents/GroupSelector'
+import Selector from './linkcomponents/Selector'
 
 export default {
   name: 'LinkPage',
-  components: {GroupSelector, RadioComponent, LinkTable},
+  components: {Selector, RadioComponent, LinkTable},
 
   data () {
     return {
       rows: [],
-      availableLanguages: {allLanguages: ['русский', 'english'], selectedLang: 'english'}
+      groups: { availableGroups: ['a','bb','ccc','dddd'], selected: null },
+      availableLanguages: {allLanguages: ['русский', 'english'], selected: 'english'}
     }
   },
+
   created () {
+    axios.get('http://localhost:8080/static/groups.json')
+      .then(response => { this.groups.availableGroups = response.data})
+      .catch(e => {console.log(e)})
   },
+
   methods: {
-    radioClicked (v) {
-      this.availableLanguages.selectedLang = v
-    },
+
     loadWords () {
+      if(this.groups.selected === null) return;
+
       axios.get('http://localhost:8080/static/words.json')
-        .then(response => {
-          this.rows = response.data
-        }).catch(e => {
-          console.log(e)
-        })
+        .then(response => {this.rows = response.data})
+        .catch(e => {  console.log(e)})
     }
+
   }
 }
 </script>
