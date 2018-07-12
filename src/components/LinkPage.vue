@@ -5,13 +5,33 @@
 
       <div class="col-4">
         <Selector :text="'Выбрать группу'" :label="'name'" :items="groups" :block="pageBlocked"/>
-        <DisengageableHref @action="admin_mode = !admin_mode" :block="pageBlocked"  :text="'Включить/выключить админку'" />
+
+        <div class="groupOptions">
+
+        <DisengageableHref @action="admin_mode = !admin_mode" :block="pageBlocked"
+                           :text="'Включить/выключить админку'"/>
+        </div>
+
+
+        <div class="groupOptions" v-if="admin_mode">
+          <DisengageableHref @action="admin_mode = !admin_mode" :block="pageBlocked"
+                             :text="'Удалить группу'"/>
+
+          <DisengageableHref @action="admin_mode = !admin_mode" :block="pageBlocked"
+                             :text="'Добавить группу'"/>
+
+          <DisengageableHref @action="admin_mode = !admin_mode" :block="pageBlocked"
+                             :text="'Редактировать группу'"/>
+        </div>
+
+
       </div>
 
       <div class="col-8">
-        <radio-component :languages="availableLanguages" :block="pageBlocked" />
-        <button class="btn btn-dark" @click="loadWords()" :disabled="pageBlocked.value" >загрузить</button>
-        <link-table :rows="rows" :selectedLang="availableLanguages.selected" :adminMode="admin_mode" :block="pageBlocked" />
+        <radio-component :languages="availableLanguages" :block="pageBlocked"/>
+        <button class="btn btn-dark" @click="loadWords()" :disabled="pageBlocked.value">загрузить</button>
+        <link-table :rows="rows" :selectedLang="availableLanguages.selected" :adminMode="admin_mode"
+                    :block="pageBlocked"/>
       </div>
     </div>
 
@@ -76,6 +96,10 @@
 
   .container {
     margin-top: 10px;
+  }
+
+  .groupOptions {
+    margin-top: 80px;
   }
 
 </style>

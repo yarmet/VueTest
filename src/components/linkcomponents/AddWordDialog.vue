@@ -2,9 +2,9 @@
   <div v-if="show.value" class="positionAbsolute form-inline">
     <div class="closeSymbol"><a href="javascript:void(0);" @click="closeWindow">&times;</a></div>
 
-    <input class="form-control center" maxlength="50" type="text" v-model="eng"/>
+    <input class="form-control center" maxlength="50" type="text" placeholder="english" v-model="eng"/>
 
-    <input class="form-control center" maxlength="50" type="text" v-model="rus"/>
+    <input class="form-control center" maxlength="50" type="text" placeholder="русский" v-model="rus"/>
 
     <button class="btn btn-danger center" @click="sendAddedWord">Добавить</button>
   </div>

@@ -1,9 +1,9 @@
 <template>
 
-  <div>
+  <div class="form-group">
     <label> {{text}}
 
-    <select id="select" class="custom-select-sm" v-model="items.selected" :disabled="block.value" >
+    <select class="form-control" v-model="items.selected" :disabled="block.value" >
       <option v-for="item in items.availableGroups" v-bind:key="item.id">{{item[label]}}</option>
     </select>
 
