@@ -28,10 +28,7 @@
       </div>
 
       <div class="col-8">
-        <radio-component :languages="availableLanguages" :block="pageBlocked"/>
-        <button class="btn btn-dark" @click="loadWords()" :disabled="pageBlocked.value">загрузить</button>
-        <link-table :rows="rows" :selectedLang="availableLanguages.selected" :adminMode="admin_mode"
-                    :block="pageBlocked"/>
+        <WordPanel :adminMode="admin_mode" :block="pageBlocked" :group="groups.selected" />
       </div>
     </div>
 
@@ -41,22 +38,20 @@
 
 <script>
   import axios from 'axios'
-  import LinkTable from './linkcomponents/LinkTable'
+  import WordPanel from './linkcomponents/WordPanel'
   import RadioComponent from './linkcomponents/RadioComponent'
   import Selector from './linkcomponents/Selector'
   import DisengageableHref from "./linkcomponents/DisengageableHref";
 
   export default {
     name: 'LinkPage',
-    components: {DisengageableHref, Selector, RadioComponent, LinkTable},
+    components: {DisengageableHref, Selector, RadioComponent, WordPanel},
 
     data() {
       return {
-        rows: [],
         groups: {availableGroups: [], selected: null},
         admin_mode: false,
-        pageBlocked: {value: false},
-        availableLanguages: {allLanguages: ['русский', 'english'], selected: 'english'}
+        pageBlocked: {value: false}
       }
     },
 
@@ -71,17 +66,6 @@
     },
 
     methods: {
-
-      loadWords() {
-        if (this.groups.selected === null) return
-        axios.get('http://localhost:8080/static/words.json')
-          .then(response => {
-            this.rows = response.data
-          })
-          .catch(e => {
-            console.log(e)
-          })
-      }
 
     }
   }

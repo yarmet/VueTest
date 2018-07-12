@@ -2,10 +2,14 @@
   <div>
     <label class="radio-inline" v-for="lang in languages.allLanguages" :key="lang">
 
-      <input type="radio" name="languageRadio" @click="languages.selected = lang" value="lang"
-             :checked="lang === languages.selected" :disabled="block.value" /> {{lang}}
+      <input type="radio" name="languageRadio"
+             @click="languages.selected = lang"
+             value="lang"
+             :checked="lang === languages.selected"
+             :disabled="block.value" />
 
-    </label>
+      {{lang}}</label>
+
   </div>
 </template>
 
