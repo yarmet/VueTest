@@ -4,32 +4,13 @@
     <div class="row">
 
       <div class="col-4">
-        <Selector :text="'Выбрать группу'" :label="'name'" :items="groups" :block="pageBlocked"/>
-
-        <div class="groupOptions">
-
-        <DisengageableHref @action="admin_mode = !admin_mode" :block="pageBlocked"
-                           :text="'Включить/выключить админку'"/>
-        </div>
-
-
-        <div class="groupOptions" v-if="admin_mode">
-          <DisengageableHref @action="admin_mode = !admin_mode" :block="pageBlocked"
-                             :text="'Удалить группу'"/>
-
-          <DisengageableHref @action="admin_mode = !admin_mode" :block="pageBlocked"
-                             :text="'Добавить группу'"/>
-
-          <DisengageableHref @action="admin_mode = !admin_mode" :block="pageBlocked"
-                             :text="'Редактировать группу'"/>
-        </div>
-
-
+        <GroupPanel :block="pageBlocked" :adminMode="admin_mode" :groups="availableGroups" @groupSelected="groupSelected" />
       </div>
 
       <div class="col-8">
-        <WordPanel :adminMode="admin_mode" :block="pageBlocked" :group="groups.selected" />
+        <WordPanel :adminMode="admin_mode.value" :block="pageBlocked" :rows="rows" @load="loadWords"/>
       </div>
+
     </div>
 
   </div>
@@ -39,34 +20,56 @@
 <script>
   import axios from 'axios'
   import WordPanel from './linkcomponents/WordPanel'
-  import RadioComponent from './linkcomponents/RadioComponent'
-  import Selector from './linkcomponents/Selector'
-  import DisengageableHref from "./linkcomponents/DisengageableHref";
+  import RadioComponent from './linkcomponents/right/RadioComponent'
+  import Selector from './linkcomponents/right/Selector'
+  import DisengageableHref from "./linkcomponents/right/DisengageableHref";
+  import GroupPanel from "./linkcomponents/GroupPanel";
 
   export default {
     name: 'LinkPage',
-    components: {DisengageableHref, Selector, RadioComponent, WordPanel},
+    components: {GroupPanel, DisengageableHref, Selector, RadioComponent, WordPanel},
 
     data() {
       return {
-        groups: {availableGroups: [], selected: null},
-        admin_mode: false,
+        availableGroups: [],
+        selectedGroup: null,
+        rows: [],
+        admin_mode: {value: false},
         pageBlocked: {value: false}
       }
     },
 
     created() {
-      axios.get('http://localhost:8080/static/groups.json')
-        .then(response => {
-          this.groups.availableGroups = response.data
-        })
-        .catch(e => {
-          console.log(e)
-        })
+      this.loadGroups()
     },
 
     methods: {
+      loadGroups() {
+        axios.get('http://localhost:8080/static/groups.json')
+          .then(response => {
+            this.availableGroups = response.data
+          })
+          .catch(e => {
+            console.log(e)
+          })
+      },
 
+      groupSelected(selected) {
+        this.selectedGroup = selected
+        this.loadWords()
+      },
+
+      loadWords() {
+        if (this.selectedGroup == null) return
+
+        axios.get('http://localhost:8080/static/words.json')
+          .then(response => {
+            this.rows = response.data
+          })
+          .catch(e => {
+            console.log(e)
+          })
+      }
     }
   }
 </script>
@@ -74,16 +77,8 @@
 
 <style scoped>
 
-  button {
-    margin-bottom: 10px;
-  }
-
   .container {
     margin-top: 10px;
-  }
-
-  .groupOptions {
-    margin-top: 80px;
   }
 
 </style>

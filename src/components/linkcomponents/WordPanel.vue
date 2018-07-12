@@ -5,7 +5,7 @@
     <EditWorldDialog :show="showEditWordDialog" :rowToEdit="rowToChange" :block="block"/>
     <AddWordDialog :show="showAddWordDialog" :block="block" :rows="rows"/>
 
-    <button class="btn btn-dark" @click="loadWords()" :disabled="block.value">загрузить</button>
+    <button class="btn btn-dark" @click="$emit('load')" :disabled="block.value">загрузить</button>
 
     <radio-component :languages="availableLanguages" :block="block" />
 
@@ -25,44 +25,32 @@
 </template>
 
 <script>
-  import HiddenTd from './HiddenTd'
-  import DeleteWordDialog from "./DeleteWordDialog";
-  import DisengageableHref from './DisengageableHref';
-  import EditWorldDialog from "./EditWordDialog";
-  import AddWordDialog from "./AddWordDialog";
-  import CTable from "./CTable";
-  import RadioComponent from "./RadioComponent"
+  import HiddenTd from './right/HiddenTd'
+  import DeleteWordDialog from "./right/DeleteWordDialog";
+  import DisengageableHref from './right/DisengageableHref';
+  import EditWorldDialog from "./right/EditWordDialog";
+  import AddWordDialog from "./right/AddWordDialog";
+  import CTable from "./right/CTable";
+  import RadioComponent from "./right/RadioComponent"
   import axios from 'axios'
 
 
   export default {
     name: 'WordPanel',
     components: {CTable, AddWordDialog, EditWorldDialog, DeleteWordDialog, HiddenTd, DisengageableHref, RadioComponent, axios},
-    props: ['adminMode', 'block', 'group'],
+    props: ['adminMode', 'block','rows'],
 
     data() {
       return {
-        rows: [],
         rowToChange: null,
         showDeleteWordDialog: {value: false},
         showEditWordDialog: {value: false},
         showAddWordDialog: {value: false},
-        availableLanguages: {allLanguages: ['русский', 'english'], selected: 'english'}
+        availableLanguages: {allLanguages: ['русский', 'english'], selected: 'english'},
       }
     },
 
-
     methods: {
-      loadWords() {
-        if (this.group == null) return
-        axios.get('http://localhost:8080/static/words.json')
-          .then(response => {
-            this.rows = response.data
-          })
-          .catch(e => {
-            console.log(e)
-          })
-      },
       deleteWord(row) {
         this.openSomeWindow(row)
         this.showDeleteWordDialog.value = true;
