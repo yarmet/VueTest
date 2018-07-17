@@ -4,7 +4,6 @@
     <div class="modal-mask" v-show="show.value">
 
       <div class="modal-wrapper">
-
         <div class="modal-container">
 
           <div class="modal-header">
@@ -15,9 +14,19 @@
 
           <div class="modal-body">
             <slot name="body">
-              <button class="btn btn-danger" @click="deleteWord">Удалить</button>
+              <div>
+                <input class="form-control center" maxlength="50" type="text" placeholder="новое название группы"
+                       v-bind:value="item.name" v-on:input="newName = $event.target.value" />
+              </div>
             </slot>
           </div>
+
+          <div class="modal-footer">
+            <slot name="footer">
+              <button class="btn btn-danger center" @click="editGroup">Изменить</button>
+            </slot>
+          </div>
+
         </div>
       </div>
     </div>
@@ -25,24 +34,35 @@
 
 </template>
 
-
 <script>
   export default {
-    name: "DeleteWordDialog",
-    props: ['show', 'items', 'item'],
+    name: "EditGroupdialog",
+    props: ['item', 'show'],
+    data() {
+      return {
+        newName: ''
+      }
+    },
     methods: {
-      deleteWord() {
-        var index =  this.items.indexOf(this.item);
-        if (index !== -1) this.items.splice(index, 1);
-        this.close()
-      },
       close() {
         this.show.value = false;
       },
+      editGroup() {
+
+        if (this.newName === '') {
+          this.newName = this.item.name
+        }
+
+        // отправляем изменное слово на сервер
+
+        // если все ок, то сеттим в таблицу новые значения
+        this.item.name = this.newName
+
+        this.close();
+      }
     }
   }
 </script>
-
 
 <style scoped>
   .modal-mask {
@@ -63,7 +83,7 @@
   }
 
   .modal-container {
-    width: 250px;
+    width: 300px;
     margin: 0px auto;
     padding: 5px;
     background-color: #fff;
@@ -74,17 +94,17 @@
   }
 
   .modal-header {
-    padding: 2px;
+    padding: 7px;
     display: block;
     text-align: right;
   }
 
   .modal-body {
-    padding: 10px;
+    padding: 0;
   }
 
   .modal-footer {
-    padding: 2px;
+    padding: 7px;
     display: block;
 
   }
@@ -111,5 +131,4 @@
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
   }
-
 </style>

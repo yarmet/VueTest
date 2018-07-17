@@ -7,7 +7,8 @@
       </div>
 
       <div class="col-8">
-        <WordPanel :adminMode="admin_mode.value" :rows="rows" @load="loadWords"/>
+        <button class="btn btn-dark" @click="loadWords">загрузить</button>
+        <WordPanel :adminMode="admin_mode.value" :rows="rows" :selectedGroup="selectedGroup" />
       </div>
     </div>
 
@@ -19,7 +20,7 @@
   import axios from 'axios'
   import WordPanel from './linkcomponents/WordPanel'
   import GroupPanel from "./linkcomponents/GroupPanel";
-  import EditWordDialog from "./linkcomponents/right/dialogs/EditWordDialog";
+  import EditWordDialog from "./linkcomponents/right/worddialogs/EditWordDialog";
 
   export default {
     name: 'LinkPage',

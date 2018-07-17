@@ -1,11 +1,9 @@
 <template>
   <div id="tablePanel">
 
-    <AddWordDialog :show="showAddWordDialog" :items="rows" />
-    <EditWordDialog :show="showEditWordDialog" :item="rowToChange" />
-    <DeleteWordDialog :show="showDeleteWordDialog" :items="rows" :item="rowToChange" />
-
-    <button class="btn btn-dark" @click="$emit('load')">загрузить</button>
+    <AddWordDialog :show="showAddWordDialog" :items="rows"  :group="selectedGroup" />
+    <EditWordDialog :show="showEditWordDialog" :item="rowToChange" :group="selectedGroup" />
+    <DeleteDialog :show="showDeleteWordDialog" :items="rows" :item="rowToChange" :group="selectedGroup" />
 
     <radio-component :languages="availableLanguages"/>
 
@@ -29,15 +27,15 @@
   import CTable from "./right/CTable";
   import RadioComponent from "./right/RadioComponent"
   import axios from 'axios'
-  import EditWordDialog from "./right/dialogs/EditWordDialog";
-  import DeleteWordDialog from "./right/dialogs/DeleteWordDialog";
-  import AddWordDialog from "./right/dialogs/AddWordDialog";
+  import EditWordDialog from "./right/worddialogs/EditWordDialog";
+  import DeleteDialog from "./right/worddialogs/DeleteDialog";
+  import AddWordDialog from "./right/worddialogs/AddWordDialog";
 
 
   export default {
     name: 'WordPanel',
-    components: {AddWordDialog, DeleteWordDialog, EditWordDialog, CTable, HiddenTd, RadioComponent, axios},
-    props: ['adminMode', 'rows'],
+    components: {AddWordDialog, DeleteDialog, EditWordDialog, CTable, HiddenTd, RadioComponent, axios},
+    props: ['adminMode', 'rows', 'selectedGroup'],
 
     data() {
       return {

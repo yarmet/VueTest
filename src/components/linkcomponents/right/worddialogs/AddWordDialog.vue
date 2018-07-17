@@ -1,5 +1,4 @@
 <template>
-
   <transition name="modal">
     <div class="modal-mask" v-show="show.value">
 
@@ -16,11 +15,9 @@
           <div class="modal-body">
             <slot name="body">
               <div>
-                <input class="form-control center" maxlength="50" type="text" placeholder="english"
-                       v-bind:value="item.english" v-on:input="editedEng = $event.target.value" />
+                <input class="form-control center" maxlength="50" type="text" placeholder="english" v-model="eng"/>
 
-                <input class="form-control center" maxlength="50" type="text" placeholder="русский"
-                       v-bind:value="item.russian" v-on:input="editedRus = $event.target.value" />
+                <input class="form-control center" maxlength="50" type="text" placeholder="русский" v-model="rus"/>
               </div>
             </slot>
           </div>
@@ -35,17 +32,16 @@
       </div>
     </div>
   </transition>
-
 </template>
 
 <script>
   export default {
-    name: "EditWordDialog",
-    props: ['show', 'item'],
+    name: "AddWordDialog",
+    props: ['items', 'show', 'group'],
     data() {
       return {
-        editedRus : '',
-        editedEng : ''
+        rus: '',
+        eng: ''
       }
     },
     methods: {
@@ -53,27 +49,19 @@
         this.show.value = false;
       },
       addWord() {
+        if (this.rus === '' || this.eng === '') return
+        // отправляем на сервер
+        this.items.push({id: 100, russian: this.rus, english: this.eng})
 
-        if (this.editedRus === '') {
-          this.editedRus = this.item.russian
-        }
-        if (this.editedEng === '') {
-          this.editedEng = this.item.english
-        }
-        // отправляем изменное слово на сервер
-
-        // если все ок, то сеттим в таблицу новые значения
-        this.item.english = this.editedEng
-        this.item.russian = this.editedRus
         this.close();
+        this.rus = ''
+        this.eng = ''
       }
     }
   }
 </script>
 
-
 <style scoped>
-
   .modal-mask {
     position: fixed;
     z-index: 9998;
