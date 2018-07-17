@@ -1,10 +1,9 @@
 <template>
-
   <div class="form-group">
     <label> {{text}}
 
-      <select class="form-control" v-model="selectedItem" :disabled="block.value" v-on:change="$emit('selected', selectedItem )">
-        <option v-for="item in items" v-bind:key="item.id">{{item[label]}}</option>
+      <select class="form-control" v-model="selectedItem" v-on:change="$emit('selected', selectedItem )">
+        <option v-for="item in items" v-bind:key="item.id" :value="item">{{item[label]}}</option>
       </select>
 
     </label>
@@ -14,7 +13,7 @@
 <script>
   export default {
     name: 'Selector',
-    props: ['items', 'label', 'text', 'block'],
+    props: ['items', 'label', 'text'],
     data() {
       return{
         selectedItem: null

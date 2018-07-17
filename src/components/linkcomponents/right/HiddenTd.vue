@@ -1,7 +1,10 @@
 <template>
 
   <td v-if="hidden === true" @click="hidden = false">
-    <DisengageableHref :text="'Показать'" :block="block"/>
+
+    <a href="#" @click="" >Показать</a>
+
+
   </td>
 
   <td v-else>
@@ -12,18 +15,18 @@
 
 <script>
 
-  import DisengageableHref from './DisengageableHref';
+
 
   export default {
     name: 'HiddenTd',
-    components: {DisengageableHref},
+
 
     data: function () {
       return {
         hidden: true
       }
     },
-    props: ['text', 'block']
+    props: ['text']
   }
 </script>
 

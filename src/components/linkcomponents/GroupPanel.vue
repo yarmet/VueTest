@@ -2,22 +2,15 @@
 
   <div id="groupPanel">
 
-    <Selector :text="'Выбрать группу'" :label="'name'" :items="groups" :block="block" @selected="(v) => $emit('groupSelected', v)" />
+    <Selector :text="'Выбрать группу'" :label="'name'" :items="groups" @selected="groupSelected"/>
 
     <div class="groupOptions">
-      <DisengageableHref @action="adminMode.value = !adminMode.value" :block="block"
-                         :text="'Включить/выключить админку'"/>
+      <a href="#" @click="adminMode.value = !adminMode.value">Включить/выключить админку</a>
     </div>
 
     <div class="groupOptions" v-if="adminMode.value">
-      <DisengageableHref @action="adminMode.value = !adminMode.value" :block="block"
-                         :text="'Удалить группу'"/>
+      <a @click="deleteGroup">Удалить группу</a>
 
-      <DisengageableHref @action="adminMode.value = !adminMode.value" :block="block"
-                         :text="'Добавить группу'"/>
-
-      <DisengageableHref @action="adminMode.value = !adminMode.value" :block="block"
-                         :text="'Редактировать группу'"/>
     </div>
 
   </div>
@@ -27,12 +20,27 @@
 
 <script>
   import Selector from './right/Selector'
-  import DisengageableHref from "./right/DisengageableHref";
+
 
   export default {
-    components: {Selector, DisengageableHref},
+    components: {Selector},
     name: "GroupPanel",
-    props: ['block', 'adminMode', 'groups']
+    props: ['adminMode', 'groups'],
+    data() {
+      return {
+        selectedGroup: null,
+        showDeleteGroupDialog: {value: false},
+      }
+    },
+    methods: {
+      groupSelected(group) {
+        this.selectedGroup = group;
+        this.$emit('groupSelected', group)
+      },
+      deleteGroup() {
+        this.showDeleteGroupDialog.value = true;
+      }
+    }
   }
 </script>
 

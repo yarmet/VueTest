@@ -5,8 +5,7 @@
       <input type="radio" name="languageRadio"
              @click="languages.selected = lang"
              value="lang"
-             :checked="lang === languages.selected"
-             :disabled="block.value" />
+             :checked="lang === languages.selected" />
 
       {{lang}}</label>
 
@@ -16,7 +15,7 @@
 <script>
 export default {
   name: 'RadioComponent',
-  props: ['languages', 'block']
+  props: ['languages']
 }
 </script>
 

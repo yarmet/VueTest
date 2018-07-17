@@ -2,15 +2,13 @@
   <div class="container">
 
     <div class="row">
-
       <div class="col-4">
-        <GroupPanel :block="pageBlocked" :adminMode="admin_mode" :groups="availableGroups" @groupSelected="groupSelected" />
+        <GroupPanel :adminMode="admin_mode" :groups="availableGroups" @groupSelected="groupSelected" @deleted="groupDeleted"/>
       </div>
 
       <div class="col-8">
-        <WordPanel :adminMode="admin_mode.value" :block="pageBlocked" :rows="rows" @load="loadWords"/>
+        <WordPanel :adminMode="admin_mode.value" :rows="rows" @load="loadWords"/>
       </div>
-
     </div>
 
   </div>
@@ -20,14 +18,12 @@
 <script>
   import axios from 'axios'
   import WordPanel from './linkcomponents/WordPanel'
-  import RadioComponent from './linkcomponents/right/RadioComponent'
-  import Selector from './linkcomponents/right/Selector'
-  import DisengageableHref from "./linkcomponents/right/DisengageableHref";
   import GroupPanel from "./linkcomponents/GroupPanel";
+  import EditWordDialog from "./linkcomponents/right/dialogs/EditWordDialog";
 
   export default {
     name: 'LinkPage',
-    components: {GroupPanel, DisengageableHref, Selector, RadioComponent, WordPanel},
+    components: {EditWordDialog, GroupPanel, WordPanel},
 
     data() {
       return {
@@ -35,7 +31,6 @@
         selectedGroup: null,
         rows: [],
         admin_mode: {value: false},
-        pageBlocked: {value: false}
       }
     },
 
@@ -57,6 +52,9 @@
       groupSelected(selected) {
         this.selectedGroup = selected
         this.loadWords()
+      },
+      groupDeleted() {
+        this.selectedGroup = null;
       },
 
       loadWords() {
@@ -80,5 +78,6 @@
   .container {
     margin-top: 10px;
   }
+
 
 </style>

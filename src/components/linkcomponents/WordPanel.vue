@@ -1,21 +1,21 @@
 <template>
   <div id="tablePanel">
 
-    <DeleteWordDialog :show="showDeleteWordDialog" :rowToDelete="rowToChange" :rows="rows" :block="block"/>
-    <EditWorldDialog :show="showEditWordDialog" :rowToEdit="rowToChange" :block="block"/>
-    <AddWordDialog :show="showAddWordDialog" :block="block" :rows="rows"/>
+    <AddWordDialog :show="showAddWordDialog" :items="rows" />
+    <EditWordDialog :show="showEditWordDialog" :item="rowToChange" />
+    <DeleteWordDialog :show="showDeleteWordDialog" :items="rows" :item="rowToChange" />
 
-    <button class="btn btn-dark" @click="$emit('load')" :disabled="block.value">загрузить</button>
+    <button class="btn btn-dark" @click="$emit('load')">загрузить</button>
 
-    <radio-component :languages="availableLanguages" :block="block" />
+    <radio-component :languages="availableLanguages"/>
 
-    <CTable :rows="rows" :col1="'russian'" :col2="'english'" :adminMode="adminMode" :block="block"
+    <CTable :rows="rows" :col1="'russian'" :col2="'english'" :adminMode="adminMode"
             @addWord="addWord"
             @editWord="editWord"
             @removeWord="deleteWord"
             v-if="availableLanguages.selected.localeCompare('english')"/>
 
-    <CTable :rows="rows" :col1="'english'" :col2="'russian'" :adminMode="adminMode" :block="block"
+    <CTable :rows="rows" :col1="'english'" :col2="'russian'" :adminMode="adminMode"
             @addWord="addWord"
             @editWord="editWord"
             @removeWord="deleteWord"
@@ -26,23 +26,22 @@
 
 <script>
   import HiddenTd from './right/HiddenTd'
-  import DeleteWordDialog from "./right/DeleteWordDialog";
-  import DisengageableHref from './right/DisengageableHref';
-  import EditWorldDialog from "./right/EditWordDialog";
-  import AddWordDialog from "./right/AddWordDialog";
   import CTable from "./right/CTable";
   import RadioComponent from "./right/RadioComponent"
   import axios from 'axios'
+  import EditWordDialog from "./right/dialogs/EditWordDialog";
+  import DeleteWordDialog from "./right/dialogs/DeleteWordDialog";
+  import AddWordDialog from "./right/dialogs/AddWordDialog";
 
 
   export default {
     name: 'WordPanel',
-    components: {CTable, AddWordDialog, EditWorldDialog, DeleteWordDialog, HiddenTd, DisengageableHref, RadioComponent, axios},
-    props: ['adminMode', 'block','rows'],
+    components: {AddWordDialog, DeleteWordDialog, EditWordDialog, CTable, HiddenTd, RadioComponent, axios},
+    props: ['adminMode', 'rows'],
 
     data() {
       return {
-        rowToChange: null,
+        rowToChange: '',
         showDeleteWordDialog: {value: false},
         showEditWordDialog: {value: false},
         showAddWordDialog: {value: false},
@@ -52,21 +51,15 @@
 
     methods: {
       deleteWord(row) {
-        this.openSomeWindow(row)
+        this.rowToChange = row;
         this.showDeleteWordDialog.value = true;
       },
       editWord(row) {
-        this.openSomeWindow(row)
+        this.rowToChange = row;
         this.showEditWordDialog.value = true;
       },
       addWord() {
-        this.openSomeWindow(null)
         this.showAddWordDialog.value = true;
-      },
-      openSomeWindow(row) {
-        document.body.classList.add('transparent');
-        this.block.value = true;
-        this.rowToChange = row;
       }
     }
   }

@@ -6,7 +6,7 @@
       <td>{{col2}}</td>
 
       <td v-if="adminMode" colspan="2">
-        <DisengageableHref :text="'Добавить'" :block="block" @action="$emit('addWord')" />
+        <a href="#" @click="$emit('addWord')">Добавить</a>
       </td>
       </thead>
 
@@ -14,14 +14,14 @@
       <tr v-for="row in rows" :key="row.id">
         <td>{{row[col1]}}</td>
 
-        <hidden-td :text="row[col2]" :block="block"/>
+        <hidden-td :text="row[col2]" />
 
         <td v-if="adminMode">
-          <DisengageableHref :text="'ред.'" :block="block" @action="$emit('editWord', row)"/>
+          <a href="#" @click="$emit('editWord', row)">ред.</a>
         </td>
 
         <td v-if="adminMode">
-          <DisengageableHref :text="'Уд.'" :block="block" @action="$emit('removeWord', row)"/>
+          <a href="#"  @click="$emit('removeWord', row)">Уд.</a>
         </td>
       </tr>
       </tbody>
@@ -33,12 +33,11 @@
 <script>
 
   import HiddenTd from './HiddenTd'
-  import DisengageableHref from './DisengageableHref';
 
   export default {
-    components: {HiddenTd, DisengageableHref},
+    components: {HiddenTd},
     name: "CTable",
-    props: ['rows', 'col1', 'col2', 'adminMode', 'block']
+    props: ['rows', 'col1', 'col2', 'adminMode']
   }
 </script>
 
