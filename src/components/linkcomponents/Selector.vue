@@ -13,9 +13,9 @@
 <script>
   export default {
     name: 'Selector',
-    props: ['items', 'label', 'text'],
+    props: {'items': Array, 'label': String, 'text': String},
     data() {
-      return{
+      return {
         selectedItem: null
       }
     }

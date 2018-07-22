@@ -33,7 +33,7 @@
   export default {
     components: {EditGroupdialog, AddGroupDialog, DeleteDialog, Selector},
     name: "GroupPanel",
-    props: ['adminMode', 'groups'],
+    props: {'adminMode': Object, 'groups': Array},
     data() {
       return {
         selectedGroup: '',
@@ -48,14 +48,14 @@
         this.$emit('groupSelected', group)
       },
       deleteGroup() {
-        if(this.selectedGroup === '') return
+        if (this.selectedGroup === '') return
         this.showDeleteGroupDialog.value = true
       },
       addGroup() {
         this.showAddGroupDialog.value = true
       },
       editGroup() {
-        if(this.selectedGroup === '') return
+        if (this.selectedGroup === '') return
         this.showEditGroupDialog.value = true
       }
     }

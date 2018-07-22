@@ -2,7 +2,7 @@
 
   <td v-if="hidden === true" @click="hidden = false">
 
-    <a href="#" @click="" >Показать</a>
+    <a href="#" @click="">Показать</a>
 
 
   </td>
@@ -16,7 +16,6 @@
 <script>
 
 
-
   export default {
     name: 'HiddenTd',
 
@@ -26,7 +25,7 @@
         hidden: true
       }
     },
-    props: ['text']
+    props: {'text': String}
   }
 </script>
 

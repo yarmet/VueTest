@@ -14,14 +14,14 @@
       <tr v-for="row in rows" :key="row.id">
         <td>{{row[col1]}}</td>
 
-        <hidden-td :text="row[col2]" />
+        <hidden-td :text="row[col2]"/>
 
         <td v-if="adminMode">
           <a href="#" @click="$emit('editWord', row)">ред.</a>
         </td>
 
         <td v-if="adminMode">
-          <a href="#"  @click="$emit('removeWord', row)">Уд.</a>
+          <a href="#" @click="$emit('removeWord', row)">Уд.</a>
         </td>
       </tr>
       </tbody>
@@ -37,7 +37,7 @@
   export default {
     components: {HiddenTd},
     name: "CTable",
-    props: ['rows', 'col1', 'col2', 'adminMode']
+    props: {'rows': Array, 'col1': String, 'col2': String, 'adminMode': Boolean}
   }
 </script>
 

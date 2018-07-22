@@ -1,9 +1,9 @@
 <template>
   <div id="tablePanel">
 
-    <AddWordDialog :show="showAddWordDialog" :items="rows"  :group="selectedGroup" />
-    <EditWordDialog :show="showEditWordDialog" :item="rowToChange" :group="selectedGroup" />
-    <DeleteDialog :show="showDeleteWordDialog" :items="rows" :item="rowToChange" :group="selectedGroup" />
+    <AddWordDialog :show="showAddWordDialog" :items="rows" :group="selectedGroup"/>
+    <EditWordDialog :show="showEditWordDialog" :item="rowToChange" :group="selectedGroup"/>
+    <DeleteDialog :show="showDeleteWordDialog" :items="rows" :item="rowToChange" :group="selectedGroup"/>
 
     <radio-component :languages="availableLanguages"/>
 
@@ -35,7 +35,7 @@
   export default {
     name: 'WordPanel',
     components: {AddWordDialog, DeleteDialog, EditWordDialog, CTable, HiddenTd, RadioComponent, axios},
-    props: ['adminMode', 'rows', 'selectedGroup'],
+    props: {'adminMode': Boolean, 'rows': Array, 'selectedGroup': Object},
 
     data() {
       return {
