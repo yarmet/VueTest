@@ -33,7 +33,10 @@
     methods: {
       deleteWord() {
         var index =  this.items.indexOf(this.item);
-        if (index !== -1) this.items.splice(index, 1);
+        if (index !== -1){
+          this.items.splice(index, 1);
+          this.$emit('deleted')
+        }
         this.close()
       },
       close() {

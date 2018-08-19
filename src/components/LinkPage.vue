@@ -56,14 +56,14 @@
         this.selectedGroup = selected
         this.loadWords()
       },
+
       groupDeleted() {
         this.selectedGroup = null;
+        alert("deleted")
       },
 
       loadWords() {
-
         if (this.selectedGroup == null) return
-
         axios.get('http://localhost:8080/static/words.json')
           .then(response => {
             this.rows = response.data

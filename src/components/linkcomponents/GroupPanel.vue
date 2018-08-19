@@ -2,7 +2,7 @@
 
   <div id="groupPanel">
 
-    <DeleteDialog :show="showDeleteGroupDialog" :items="groups" :item="selectedGroup"/>
+    <DeleteDialog :show="showDeleteGroupDialog" :items="groups" :item="selectedGroup" @deleted="$emit('deleted')" />
     <AddGroupDialog :show="showAddGroupDialog" :items="groups"/>
     <EditGroupdialog :show="showEditGroupDialog" :item="selectedGroup"/>
 
@@ -64,7 +64,7 @@
 
 <style scoped>
   #groupPanel {
-    background: coral;
+    /*background: coral;*/
   }
 
   .groupOptions {
