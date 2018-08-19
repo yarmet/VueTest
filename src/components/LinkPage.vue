@@ -21,9 +21,12 @@
   import WordPanel from './linkcomponents/WordPanel'
   import GroupPanel from "./linkcomponents/GroupPanel";
   import EditWordDialog from "./linkcomponents/right/worddialogs/EditWordDialog";
+  import {Ajax} from "./Ajax"
+
 
   export default {
     name: 'LinkPage',
+    mixins: [Ajax],
     components: {EditWordDialog, GroupPanel, WordPanel},
 
     data() {
@@ -44,8 +47,7 @@
         axios.get('http://localhost:8080/static/groups.json')
           .then(response => {
             this.availableGroups = response.data
-          })
-          .catch(e => {
+          }).catch(e => {
             console.log(e)
           })
       },
@@ -59,13 +61,13 @@
       },
 
       loadWords() {
+
         if (this.selectedGroup == null) return
 
         axios.get('http://localhost:8080/static/words.json')
           .then(response => {
             this.rows = response.data
-          })
-          .catch(e => {
+          }).catch(e => {
             console.log(e)
           })
       }
