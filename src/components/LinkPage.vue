@@ -2,14 +2,16 @@
   <div class="container">
 
     <div class="row">
+
       <div class="col-4">
-        <GroupPanel :adminMode="admin_mode" :groups="availableGroups" @groupSelected="groupSelected" @deleted="groupDeleted"/>
+        <GroupPanel :adminMode="admin_mode" :groups="availableGroups" @groupSelected="groupSelected"/>
       </div>
 
       <div class="col-8">
         <button class="btn btn-dark" @click="loadWords">загрузить</button>
-        <WordPanel :adminMode="admin_mode.value" :rows="rows" :selectedGroup="selectedGroup" />
+        <WordPanel :adminMode="admin_mode.value" :rows="rows" :selectedGroup="selectedGroup"/>
       </div>
+
     </div>
 
   </div>
@@ -20,14 +22,14 @@
   import axios from 'axios'
   import WordPanel from './linkcomponents/WordPanel'
   import GroupPanel from "./linkcomponents/GroupPanel";
-  import EditWordDialog from "./linkcomponents/right/worddialogs/EditWordDialog";
+
   import {Ajax} from "./Ajax"
 
 
   export default {
     name: 'LinkPage',
     mixins: [Ajax],
-    components: {EditWordDialog, GroupPanel, WordPanel},
+    components: {GroupPanel, WordPanel},
 
     data() {
       return {
@@ -43,13 +45,14 @@
     },
 
     methods: {
+
       loadGroups() {
         axios.get('http://localhost:8080/static/groups.json')
           .then(response => {
             this.availableGroups = response.data
           }).catch(e => {
-            console.log(e)
-          })
+          console.log(e)
+        })
       },
 
       groupSelected(selected) {
@@ -57,10 +60,6 @@
         this.loadWords()
       },
 
-      groupDeleted() {
-        this.selectedGroup = null;
-        alert("deleted")
-      },
 
       loadWords() {
         if (this.selectedGroup == null) return
@@ -68,9 +67,10 @@
           .then(response => {
             this.rows = response.data
           }).catch(e => {
-            console.log(e)
-          })
+          console.log(e)
+        })
       }
+
     }
   }
 </script>

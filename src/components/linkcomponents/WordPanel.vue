@@ -49,17 +49,17 @@
 
     methods: {
       deleteWord(row) {
-        if(this.selectedGroup === null) return
+        if(this.selectedGroup === null) return;
         this.rowToChange = row;
         this.showDeleteWordDialog.value = true;
       },
       editWord(row) {
-        if(this.selectedGroup === null) return
+        if(this.selectedGroup === null) return;
         this.rowToChange = row;
         this.showEditWordDialog.value = true;
       },
       addWord() {
-        if(this.selectedGroup === null) return
+        if(this.selectedGroup === null) return;
         this.showAddWordDialog.value = true;
       }
     }

@@ -8,11 +8,12 @@
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
+
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
-            <router-link class="nav-item nav-link" to="/">Фильмы</router-link>
-            <router-link class="nav-item nav-link" to="/input">Новинки</router-link>
-
+            <router-link class="nav-item nav-link" to="/">Перевод</router-link>
+            <router-link class="nav-item nav-link" to="/input">Ввести</router-link>
+            <router-link class="nav-item nav-link" to="/groups">Группы</router-link>
           </div>
         </div>
       </nav>

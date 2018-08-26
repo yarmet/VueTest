@@ -52,7 +52,6 @@
   .linkTable td {
     border: 1px solid #cbcbcb;
     height: 12px;
-    width: 12px;
     padding: 6px;
   }
 
