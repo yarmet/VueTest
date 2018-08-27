@@ -1,7 +1,7 @@
 <template>
 
   <transition name="modal">
-    <div class="modal-mask" v-show="show.value">
+    <div class="modal-mask" v-show="value">
 
       <div class="modal-wrapper">
         <div class="modal-container">
@@ -37,7 +37,7 @@
 <script>
   export default {
     name: "AddGroupDialog",
-    props: ['items', 'show'],
+    props: ['items', 'value'],
     data() {
       return {
         groupName: ''
@@ -45,14 +45,13 @@
     },
     methods: {
       addGroup() {
-
         this.items.push({id: 100, name: this.groupName})
         // отправляем на сервер!
-
         this.close();
       },
+
       close() {
-        this.show.value = false;
+        this.$emit('input', false )
       }
     }
 

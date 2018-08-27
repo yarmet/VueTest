@@ -15,22 +15,9 @@
 
           <div class="modal-body">
             <slot name="body">
-              <div>
-                <input class="form-control center" maxlength="50" type="text" placeholder="english"
-                       v-bind:value="item.english" v-on:input="editedEng = $event.target.value" />
-
-                <input class="form-control center" maxlength="50" type="text" placeholder="русский"
-                       v-bind:value="item.russian" v-on:input="editedRus = $event.target.value" />
-              </div>
+              <button class="btn btn-danger" @click="deleteWord">Удалить</button>
             </slot>
           </div>
-
-          <div class="modal-footer">
-            <slot name="footer">
-              <button class="btn btn-danger center" @click="addWord">Добавить</button>
-            </slot>
-          </div>
-
         </div>
       </div>
     </div>
@@ -38,42 +25,28 @@
 
 </template>
 
+
 <script>
   export default {
-    name: "EditWordDialog",
-    props: ['value', 'item'],
-    data() {
-      return {
-        editedRus : '',
-        editedEng : ''
-      }
-    },
+    name: "DeleteWordDialog",
+    props: ['value', 'items', 'item'],
     methods: {
+      deleteWord() {
+        var index =  this.items.indexOf(this.item);
+        if (index !== -1){
+          this.items.splice(index, 1);
+        }
+        this.close()
+      },
       close() {
         this.$emit('input', false )
       },
-      addWord() {
-
-        if (this.editedRus === '') {
-          this.editedRus = this.item.russian
-        }
-        if (this.editedEng === '') {
-          this.editedEng = this.item.english
-        }
-        // отправляем изменное слово на сервер
-
-        // если все ок, то сеттим в таблицу новые значения
-        this.item.english = this.editedEng;
-        this.item.russian = this.editedRus;
-        this.close();
-      }
     }
   }
 </script>
 
 
 <style scoped>
-
   .modal-mask {
     position: fixed;
     z-index: 9998;
@@ -92,7 +65,7 @@
   }
 
   .modal-container {
-    width: 300px;
+    width: 250px;
     margin: 0px auto;
     padding: 5px;
     background-color: #fff;
@@ -103,17 +76,17 @@
   }
 
   .modal-header {
-    padding: 7px;
+    padding: 2px;
     display: block;
     text-align: right;
   }
 
   .modal-body {
-    padding: 0;
+    padding: 10px;
   }
 
   .modal-footer {
-    padding: 7px;
+    padding: 2px;
     display: block;
 
   }

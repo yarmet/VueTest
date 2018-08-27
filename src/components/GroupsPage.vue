@@ -2,9 +2,9 @@
 
   <div class="container">
 
-    <DeleteDialog :show="showDeleteWordDialog" :items="availableGroups" :item="selectedGroup" :group="selectedGroup"/>
-    <EditGroupDialog :show="showEditWordDialog" :item="selectedGroup" />
-    <AddGroupDialog  :show="showAddWordDialog" :items="availableGroups" />
+    <DeleteGroupDialog v-model="showDeleteWordDialog" :items="availableGroups" :item="selectedGroup"/>
+    <EditGroupDialog v-model="showEditWordDialog" :item="selectedGroup"/>
+    <AddGroupDialog v-model="showAddWordDialog" :items="availableGroups"/>
 
     <div class="row">
 
@@ -48,12 +48,12 @@
   import axios from 'axios'
   import AddGroupDialog from "./linkcomponents/groupdialogs/AddGroupDialog"
   import EditGroupDialog from "./linkcomponents/groupdialogs/EditGroupdialog"
-  import DeleteDialog from "./linkcomponents/right/worddialogs/DeleteDialog"
+  import DeleteGroupDialog from "./linkcomponents/groupdialogs/DeleteGroupDialog"
 
   export default {
     name: "Groups",
     mixins: [Ajax],
-    components: {AddGroupDialog, EditGroupDialog, DeleteDialog},
+    components: {AddGroupDialog, EditGroupDialog, DeleteGroupDialog},
 
     created() {
       this.loadGroups();
@@ -63,9 +63,9 @@
       return {
         availableGroups: [],
         selectedGroup: '',
-        showDeleteWordDialog: {value: false},
-        showEditWordDialog: {value: false},
-        showAddWordDialog: {value: false}
+        showDeleteWordDialog: false,
+        showEditWordDialog: false,
+        showAddWordDialog: false
       }
     },
 
@@ -81,14 +81,14 @@
 
       deleteGroup(row) {
         this.selectedGroup = row;
-        this.showDeleteWordDialog.value = true;
+        this.showDeleteWordDialog = true;
       },
       editGroup(row) {
         this.selectedGroup = row;
-        this.showEditWordDialog.value = true;
+        this.showEditWordDialog = true;
       },
       addGroup() {
-        this.showAddWordDialog.value = true;
+        this.showAddWordDialog = true;
       }
 
     }

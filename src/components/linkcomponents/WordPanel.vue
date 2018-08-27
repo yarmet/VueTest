@@ -1,9 +1,9 @@
 <template>
   <div id="tablePanel">
 
-    <AddWordDialog :show="showAddWordDialog" :items="rows" :group="selectedGroup"/>
-    <EditWordDialog :show="showEditWordDialog" :item="rowToChange" :group="selectedGroup"/>
-    <DeleteDialog :show="showDeleteWordDialog" :items="rows" :item="rowToChange" :group="selectedGroup"/>
+    <AddWordDialog v-model="showAddWordDialog" :items="rows" :group="selectedGroup"/>
+    <EditWordDialog v-model="showEditWordDialog" :item="rowToChange"/>
+    <DeleteWordDialog v-model="showDeleteWordDialog" :items="rows" :item="rowToChange"/>
 
     <radio-component :languages="availableLanguages"/>
 
@@ -18,8 +18,8 @@
             @editWord="editWord"
             @removeWord="deleteWord"
             v-else/>
-
   </div>
+
 </template>
 
 <script>
@@ -28,39 +28,39 @@
   import RadioComponent from "./right/RadioComponent"
   import axios from 'axios'
   import EditWordDialog from "./right/worddialogs/EditWordDialog";
-  import DeleteDialog from "./right/worddialogs/DeleteDialog";
+  import DeleteWordDialog from "./right/worddialogs/DeleteWordDialog";
   import AddWordDialog from "./right/worddialogs/AddWordDialog";
 
 
   export default {
     name: 'WordPanel',
-    components: {AddWordDialog, DeleteDialog, EditWordDialog, CTable, HiddenTd, RadioComponent, axios},
+    components: {AddWordDialog, DeleteWordDialog, EditWordDialog, CTable, HiddenTd, RadioComponent, axios},
     props: {'adminMode': Boolean, 'rows': Array, 'selectedGroup': Object},
 
     data() {
       return {
         rowToChange: '',
-        showDeleteWordDialog: {value: false},
-        showEditWordDialog: {value: false},
-        showAddWordDialog: {value: false},
+        showDeleteWordDialog: false,
+        showEditWordDialog: false,
+        showAddWordDialog: false,
         availableLanguages: {allLanguages: ['русский', 'english'], selected: 'english'},
       }
     },
 
     methods: {
       deleteWord(row) {
-        if(this.selectedGroup === null) return;
+        if (this.selectedGroup === null) return;
         this.rowToChange = row;
-        this.showDeleteWordDialog.value = true;
+        this.showDeleteWordDialog = true;
       },
       editWord(row) {
-        if(this.selectedGroup === null) return;
+        if (this.selectedGroup === null) return;
         this.rowToChange = row;
-        this.showEditWordDialog.value = true;
+        this.showEditWordDialog = true;
       },
       addWord() {
-        if(this.selectedGroup === null) return;
-        this.showAddWordDialog.value = true;
+        if (this.selectedGroup === null) return;
+        this.showAddWordDialog = true;
       }
     }
   }

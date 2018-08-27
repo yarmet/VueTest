@@ -1,7 +1,7 @@
 <template>
 
   <transition name="modal">
-    <div class="modal-mask" v-show="show.value">
+    <div class="modal-mask" v-show="value">
 
       <div class="modal-wrapper">
 
@@ -28,19 +28,18 @@
 
 <script>
   export default {
-    name: "DeleteDialog",
-    props: ['show', 'items', 'item', 'group'],
+    name: "DeleteGroupDialog",
+    props: ['value', 'items', 'item'],
     methods: {
       deleteWord() {
-        var index =  this.items.indexOf(this.item);
+        let index =  this.items.indexOf(this.item);
         if (index !== -1){
           this.items.splice(index, 1);
-          this.$emit('deleted')
         }
         this.close()
       },
       close() {
-        this.show.value = false;
+        this.$emit('input', false )
       },
     }
   }

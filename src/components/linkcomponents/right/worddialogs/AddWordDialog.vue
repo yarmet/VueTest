@@ -1,6 +1,6 @@
 <template>
   <transition name="modal">
-    <div class="modal-mask" v-show="show.value">
+    <div class="modal-mask" v-show="value">
 
       <div class="modal-wrapper">
 
@@ -37,7 +37,7 @@
 <script>
   export default {
     name: "AddWordDialog",
-    props: ['items', 'show', 'group'],
+    props: ['items', 'value', 'group'],
     data() {
       return {
         rus: '',
@@ -46,7 +46,7 @@
     },
     methods: {
       close() {
-        this.show.value = false;
+        this.$emit('input', false)
       },
       addWord() {
         if (this.rus === '' || this.eng === '') return

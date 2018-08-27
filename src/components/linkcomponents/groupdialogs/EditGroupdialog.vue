@@ -1,7 +1,7 @@
 <template>
 
   <transition name="modal">
-    <div class="modal-mask" v-show="show.value">
+    <div class="modal-mask" v-show="value">
 
       <div class="modal-wrapper">
         <div class="modal-container">
@@ -37,7 +37,7 @@
 <script>
   export default {
     name: "EditGroupdialog",
-    props: ['item', 'show'],
+    props: ['item', 'value'],
     data() {
       return {
         newName: ''
@@ -45,16 +45,14 @@
     },
     methods: {
       close() {
-        this.show.value = false;
+        this.$emit('input', false )
       },
       editGroup() {
-
         if (this.newName === '') {
           this.newName = this.item.name
         }
-
         // отправляем изменное слово на сервер
-        console.log(this.item)
+
         // если все ок, то сеттим в таблицу новые значения
         this.item.name = this.newName;
 
