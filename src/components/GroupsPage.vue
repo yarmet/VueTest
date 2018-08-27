@@ -78,7 +78,6 @@
           console.log(e)
         })
       },
-
       deleteGroup(row) {
         this.selectedGroup = row;
         this.showDeleteWordDialog = true;
