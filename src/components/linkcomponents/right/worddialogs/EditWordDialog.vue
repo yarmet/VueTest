@@ -63,8 +63,8 @@
         // отправляем изменное слово на сервер
 
         // если все ок, то сеттим в таблицу новые значения
-        this.item.english = this.editedEng
-        this.item.russian = this.editedRus
+        this.item.english = this.editedEng;
+        this.item.russian = this.editedRus;
         this.close();
       }
     }

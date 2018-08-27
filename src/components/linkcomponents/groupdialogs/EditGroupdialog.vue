@@ -54,9 +54,9 @@
         }
 
         // отправляем изменное слово на сервер
-
+        console.log(this.item)
         // если все ок, то сеттим в таблицу новые значения
-        this.item.name = this.newName
+        this.item.name = this.newName;
 
         this.close();
       }

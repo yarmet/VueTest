@@ -62,7 +62,7 @@
     data() {
       return {
         availableGroups: [],
-        selectedGroup: null,
+        selectedGroup: '',
         showDeleteWordDialog: {value: false},
         showEditWordDialog: {value: false},
         showAddWordDialog: {value: false}

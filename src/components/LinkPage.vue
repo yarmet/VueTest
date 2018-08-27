@@ -4,7 +4,8 @@
     <div class="row">
 
       <div class="col-4">
-        <GroupPanel :adminMode="admin_mode" :groups="availableGroups" @groupSelected="groupSelected"/>
+        <a href="javascript:void(0);" @click="admin_mode.value = !admin_mode.value">Включить/выключить админку</a>
+        <Selector :text="'Выбрать группу'" :label="'name'" :items="availableGroups" @selected="groupSelected"/>
       </div>
 
       <div class="col-8">
@@ -13,7 +14,6 @@
       </div>
 
     </div>
-
   </div>
 </template>
 
@@ -21,7 +21,7 @@
 <script>
   import axios from 'axios'
   import WordPanel from './linkcomponents/WordPanel'
-  import GroupPanel from "./linkcomponents/GroupPanel";
+  import Selector from './linkcomponents/Selector'
 
   import {Ajax} from "./Ajax"
 
@@ -29,7 +29,7 @@
   export default {
     name: 'LinkPage',
     mixins: [Ajax],
-    components: {GroupPanel, WordPanel},
+    components: {WordPanel, Selector},
 
     data() {
       return {
@@ -73,6 +73,7 @@
 
     }
   }
+  
 </script>
 
 
@@ -81,6 +82,5 @@
   .container {
     margin-top: 10px;
   }
-
 
 </style>
