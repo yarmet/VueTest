@@ -17,10 +17,10 @@
             <slot name="body">
               <div>
                 <input class="form-control center" maxlength="50" type="text" placeholder="english"
-                       v-bind:value="item.english" v-on:input="editedEng = $event.target.value" />
+                       v-bind:value="item.english" v-on:input="editedEng = $event.target.value"/>
 
                 <input class="form-control center" maxlength="50" type="text" placeholder="русский"
-                       v-bind:value="item.russian" v-on:input="editedRus = $event.target.value" />
+                       v-bind:value="item.russian" v-on:input="editedRus = $event.target.value"/>
               </div>
             </slot>
           </div>
