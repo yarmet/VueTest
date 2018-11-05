@@ -12,6 +12,7 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
             <router-link class="nav-item nav-link" to="/">Перевод</router-link>
+            <router-link class="nav-item nav-link" to="/write">Ввести</router-link>
             <router-link class="nav-item nav-link" to="/groups">Группы</router-link>
           </div>
         </div>
