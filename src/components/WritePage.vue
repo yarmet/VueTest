@@ -7,7 +7,7 @@
       </div>
 
       <div class="col-8">
-        <button class="btn btn-dark" @click="loadWords">загрузить</button>
+        <button id="load_btn" class="btn btn-dark" @click="loadWords">загрузить</button>
 
         <enter-table :words="rows" />
 
@@ -73,4 +73,9 @@
   .container {
     margin-top: 10px;
   }
+
+  #load_btn{
+    margin-bottom: 10px;
+  }
+
 </style>
