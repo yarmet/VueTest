@@ -1,19 +1,15 @@
 <template>
   <div id="tablePanel">
 
-    <AddWordDialog v-model="showAddWordDialog" :items="rows" :group="selectedGroup"/>
-    <EditWordDialog v-model="showEditWordDialog" :item="rowToChange"/>
-    <DeleteWordDialog v-model="showDeleteWordDialog" :items="rows" :item="rowToChange"/>
-
     <radio-component :languages="availableLanguages"/>
 
-    <CTable :rows="rows" :col1="'russian'" :col2="'english'" :adminMode="adminMode"
+    <CTable :rows="rows" :col1="'russian'" :col2="'english'"
             @addWord="addWord"
             @editWord="editWord"
             @removeWord="deleteWord"
             v-if="availableLanguages.selected.localeCompare('english')"/>
 
-    <CTable :rows="rows" :col1="'english'" :col2="'russian'" :adminMode="adminMode"
+    <CTable :rows="rows" :col1="'english'" :col2="'russian'"
             @addWord="addWord"
             @editWord="editWord"
             @removeWord="deleteWord"
@@ -31,11 +27,10 @@
   import DeleteWordDialog from "./right/worddialogs/DeleteWordDialog";
   import AddWordDialog from "./right/worddialogs/AddWordDialog";
 
-
   export default {
     name: 'WordPanel',
     components: {AddWordDialog, DeleteWordDialog, EditWordDialog, CTable, HiddenTd, RadioComponent, axios},
-    props: {'adminMode': Boolean, 'rows': Array, 'selectedGroup': Object},
+    props: {'rows': Array, 'selectedGroup': Object},
 
     data() {
       return {

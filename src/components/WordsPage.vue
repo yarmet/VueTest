@@ -1,32 +1,33 @@
 <template>
+
   <div class="container">
-
     <div class="row">
-
       <div class="col-4">
-        <Selector :text="'Выбрать группу'" :label="'name'" :items="availableGroups" @selected="groupSelected"/>
+
+        <Selector :text="'Выбрать группу'" :label="'name'" :items="availableGroups"
+                  @selected="groupSelected" />
       </div>
 
       <div class="col-8">
-        <button class="btn btn-dark" @click="loadWords">загрузить</button>
-        <WordPanel :rows="rows" :selectedGroup="selectedGroup"/>
+        <GroupWords :selectedGroup="selectedGroup" :rows="rows" />
       </div>
 
     </div>
   </div>
-</template>
 
+</template>
 
 <script>
   import axios from 'axios'
-  import WordPanel from './linkcomponents/WordPanel'
   import Selector from './linkcomponents/Selector'
+  import GroupWords from './linkcomponents/GroupWords'
+
   import {Ajax} from "./Ajax"
 
   export default {
-    name: 'LinkPage',
+    name: "WordsPage",
     mixins: [Ajax],
-    components: {WordPanel, Selector},
+    components: {Selector, GroupWords},
 
     data() {
       return {
@@ -40,7 +41,9 @@
       this.loadGroups()
     },
 
+
     methods: {
+
       loadGroups() {
         axios.get('http://localhost:8080/static/groups.json')
           .then(response => {
@@ -49,10 +52,12 @@
           console.log(e)
         })
       },
+
       groupSelected(selected) {
         this.selectedGroup = selected
         this.loadWords()
       },
+
       loadWords() {
         if (this.selectedGroup == null) return
         axios.get('http://localhost:8080/static/words.json')
@@ -67,11 +72,6 @@
   }
 </script>
 
-
 <style scoped>
-
-  .container {
-    margin-top: 10px;
-  }
 
 </style>

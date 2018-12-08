@@ -1,6 +1,5 @@
 <template>
 
-
   <table class="editTable">
     <tr>
       <th>Русский</th>
@@ -10,17 +9,11 @@
     <tr v-for="word in words" :key="word.id">
       <td>{{word.russian}}</td>
       <td>
-
-
-        <custom-input :word="word.english" />
-          <!--<input type="text" maxlength="30" class="form-control" v-bind:class="{green : false}" @input="onValueUpdated($event.target.value, word.english)"  />-->
-          <!--{{word.english}}-->
-
+        <custom-input :word="word.english"/>
       </td>
     </tr>
 
   </table>
-
 </template>
 
 <script>
