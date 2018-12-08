@@ -31,4 +31,8 @@
     background-color: #c3fdce;
   }
 
+  input {
+    border: none
+  }
+
 </style>

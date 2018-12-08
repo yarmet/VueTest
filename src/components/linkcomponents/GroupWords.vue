@@ -1,5 +1,4 @@
 <template>
-
   <div>
     <AddWordDialog v-model="showAddWordDialog" :items="rows" :group="selectedGroup"/>
     <EditWordDialog v-model="showEditWordDialog" :item="rowToChange"/>
@@ -32,8 +31,6 @@
       </tbody>
     </table>
   </div>
-
-
 </template>
 
 <script>
@@ -41,7 +38,6 @@
   import AddWordDialog from './right/worddialogs/AddWordDialog'
   import EditWordDialog from './right/worddialogs/EditWordDialog'
   import DeleteWordDialog from './right/worddialogs/DeleteWordDialog'
-
 
   export default {
     name: "GroupWords",
@@ -55,9 +51,6 @@
         showEditWordDialog: false,
         showAddWordDialog: false,
       }
-    },
-
-    created() {
     },
 
     methods: {

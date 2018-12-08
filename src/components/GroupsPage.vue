@@ -95,6 +95,11 @@
 </script>
 
 <style scoped>
+
+  .container {
+    margin-top: 10px;
+  }
+
   .linkTable {
     margin: auto;
     border-collapse: collapse;

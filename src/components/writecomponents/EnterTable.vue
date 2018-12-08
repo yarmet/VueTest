@@ -9,7 +9,7 @@
     <tr v-for="word in words" :key="word.id">
       <td>{{word.russian}}</td>
       <td>
-        <custom-input :word="word.english"/>
+        <CustomInput :word="word.english"/>
       </td>
     </tr>
 
@@ -36,10 +36,13 @@
     background-color: white;
   }
 
-  .editTable td {
+  .editTable td,  .editTable th {
     border: 1px solid #cbcbcb;
     height: 12px;
-    padding: 6px;
+    /*padding: 6px;*/
+
+
+
   }
 
 </style>
