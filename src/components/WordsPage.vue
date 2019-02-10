@@ -22,7 +22,7 @@
   import Selector from './linkcomponents/Selector'
   import GroupWords from './linkcomponents/GroupWords'
 
-  import {Ajax} from "./Ajax"
+  import {Ajax} from "../components/ajax"
 
   export default {
     name: "WordsPage",

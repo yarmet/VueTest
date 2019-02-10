@@ -44,7 +44,7 @@
 
 <script>
 
-  import {Ajax} from "./Ajax"
+  import {Ajax} from "../components/ajax"
   import axios from 'axios'
   import AddGroupDialog from "./linkcomponents/groupdialogs/AddGroupDialog"
   import EditGroupDialog from "./linkcomponents/groupdialogs/EditGroupdialog"

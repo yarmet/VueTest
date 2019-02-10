@@ -21,7 +21,7 @@
   import axios from 'axios'
   import WordPanel from './linkcomponents/WordPanel'
   import Selector from './linkcomponents/Selector'
-  import {Ajax} from "./Ajax"
+  import {Ajax} from "../components/ajax"
 
   export default {
     name: 'LinkPage',
